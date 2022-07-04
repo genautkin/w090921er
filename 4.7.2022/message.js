@@ -1,3 +1,7 @@
 const message = "new Message"; 
-console.log(message);
+
+const printer = require('./modules/print');
+
+const returnValue = printer.print(message);
+printer.printTwoVariable("messageA","Message B");
 

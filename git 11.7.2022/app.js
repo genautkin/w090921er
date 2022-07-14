@@ -14,7 +14,7 @@ app.use(express.static(publicDirectoryPath));
 const viewsPath = path.join(__dirname,'./templates/views') 
 app.set('views', viewsPath)
 
-app.get("" || "/index*" , (req, res) => {
+app.get("" , (req, res) => {
 
 res.render("index",{imagesArray: images});
 });

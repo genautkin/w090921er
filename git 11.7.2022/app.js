@@ -9,14 +9,20 @@ const path = require("path");
 
 const publicDirectoryPath = path.join(__dirname, "./public");
 
-
-
 app.use(express.static(publicDirectoryPath));
 
-app.get("", (req, res) => {
+const viewsPath = path.join(__dirname,'./templates/views') 
+app.set('views', viewsPath)
+
+app.get("" || "/index*" , (req, res) => {
 
 res.render("index",{imagesArray: images});
 });
+
+app.get("/about" , (req, res) => {
+
+    res.render("about",{imagesArray: images});
+    });
 
 
 app.listen(PORT, () => {

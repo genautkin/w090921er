@@ -19,6 +19,9 @@ app.get("" , (req, res) => {
     res.render("index",{imagesArray: images});
 });
 
+app.get('*', (req, res) => { 
+    res.redirect(303,"/") })
+
 
 
 app.listen(PORT, () => {

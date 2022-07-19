@@ -31,7 +31,7 @@ app.get("/form" , (req, res) => {
 });
 
 app.post("/form" , (req, res) => {
-    console.log(req.body.name);
+    console.log(req.body);
     res.render("form");
 });
 

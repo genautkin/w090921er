@@ -5,6 +5,7 @@ const images = require('./modules/images');
 const sql = require('./modules/connectToSql');
 const bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
+const Joi = require('joi');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -30,10 +31,36 @@ app.get("/form" , (req, res) => {
     res.render("form");
 });
 
+const contactSchema = Joi.object({
+    name: Joi.string().required().min(2).max(70),
+    email: Joi.string().required().email(),
+    phone: Joi.number().integer().min(9),
+    submit: Joi.string()
+  });
+
 app.post("/form" , (req, res) => {
-    console.log(req.body);
-    res.render("form");
+    const { error, value } = contactSchema.validate(req.body);
+    if (error) {
+        res.send(error);
+    }
+    else {
+        sql.query(`INSERT INTO Persons VALUES (NULL, "${req.body.name}", "${req.body.email}", "${req.body.phone}");`,
+         function (error, results, fields) {
+            if (error) throw error;
+            console.log(results);
+            console.log(fields);
+          });
+        res.redirect(303,"form");
+    }
 });
+
+
+app.get("/countries", (req, res) => {
+    sql.query('SELECT * FROM countries', function (error, results, fields) {
+        if (error) throw error;
+        res.send(results)
+      });
+})
 
 // app.get('*', (req, res) => { 
 //     res.redirect(303,"/") })

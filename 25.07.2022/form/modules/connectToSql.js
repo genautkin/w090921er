@@ -3,7 +3,8 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
-  port : 8889
+  port : 8889,
+  database : 'Forms'
 });
  
 const connectionStatus = function(err) {
@@ -13,4 +14,6 @@ const connectionStatus = function(err) {
       }
       console.log('connected as id ' + connection.threadId);
 }
-module.exports = connection.connect(connectionStatus);
+connection.connect(connectionStatus);
+   
+module.exports = connection;

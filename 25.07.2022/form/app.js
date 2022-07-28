@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const images = require('./modules/images');
 const sql = require('./modules/connectToSql');
+const mongo = require('./modules/mongoDb');
 const bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
 const Joi = require('joi');

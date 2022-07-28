@@ -38,13 +38,36 @@ const contactSchema = Joi.object({
     submit: Joi.string()
   });
 
+// app.post("/form" , (req, res) => {
+//     const { error, value } = contactSchema.validate(req.body);
+//     if (error) {
+//         res.send(error);
+//     }
+//     else {
+//         const name = sql.escape(req.body.name);
+//         const email = sql.escape(req.body.email);
+//         const phone = sql.escape(req.body.phone)
+//         sql.query(`INSERT INTO Persons VALUES (NULL, ${name}, ${email}, ${phone});`,
+//          function (error, results, fields) {
+//             if (error) throw error;
+//             console.log(results);
+//             console.log(fields);
+//           });
+//         res.redirect(303,"form");
+//     }
+// });
+
 app.post("/form" , (req, res) => {
     const { error, value } = contactSchema.validate(req.body);
     if (error) {
         res.send(error);
     }
     else {
-        sql.query(`INSERT INTO Persons VALUES (NULL, "${req.body.name}", "${req.body.email}", "${req.body.phone}");`,
+        const name = req.body.name;
+        const email = req.body.email;
+        const phone = req.body.phone;
+        const sqlQuery = 'INSERT INTO Persons VALUES (NULL, ?, ?, ?)';
+        sql.query(sqlQuery,[name, email, phone],
          function (error, results, fields) {
             if (error) throw error;
             console.log(results);
@@ -55,12 +78,14 @@ app.post("/form" , (req, res) => {
 });
 
 
-app.get("/countries", (req, res) => {
-    sql.query('SELECT * FROM countries', function (error, results, fields) {
+
+app.get("/users", (req, res) => {
+    sql.query('SELECT * FROM Persons', function (error, results) {
         if (error) throw error;
-        res.send(results)
+        res.render("users",{users: results});
       });
 })
+
 
 // app.get('*', (req, res) => { 
 //     res.redirect(303,"/") })

@@ -26,9 +26,6 @@ const bookSchema = mongoose.Schema({
 
 // create Book model
 const Book = mongoose.model('books', bookSchema);
-const bookToSave = new Book({title:"HackerU book", pageCount:0});
 
-//Book.find({}).then( books => {books.forEach( book => console.log(book) )}).catch((err) => console.error(err));
-bookToSave.save().then((res)=>{console.log(res)}).catch((err)=>console.error(err));
 
-module.exports = mongoose;
+module.exports = Book;

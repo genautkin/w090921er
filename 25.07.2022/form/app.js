@@ -2,11 +2,9 @@ const express = require("express");
 const PORT = process.env.PORT || 3000;
 const app = express();
 const images = require('./modules/images');
-const sql = require('./modules/connectToSql');
-const mongo = require('./modules/mongoDb');
+const Book = require('./modules/mongoDb');
 const bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
-const Joi = require('joi');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -16,6 +14,12 @@ const path = require("path");
 const publicDirectoryPath = path.join(__dirname, "./public");
 
 app.use(express.static(publicDirectoryPath));
+
+app.use(function(req, res, next){
+    console.log(req.method);
+    console.log(req.url);
+    next();
+    })
 
 const viewsPath = path.join(__dirname,'/templates/views') 
 app.set('views', viewsPath)
@@ -28,16 +32,10 @@ app.get("" , (req, res) => {
     res.render("index",{imagesArray: _images});
 });
 
-app.get("/form" , (req, res) => {
-    res.render("form");
-});
+const formRoute = require('./routes/form');
+app.use('/form', formRoute);
 
-const contactSchema = Joi.object({
-    name: Joi.string().required().min(2).max(70),
-    email: Joi.string().required().email(),
-    phone: Joi.number().integer().min(9),
-    submit: Joi.string()
-  });
+
 
 // app.post("/form" , (req, res) => {
 //     const { error, value } = contactSchema.validate(req.body);
@@ -58,25 +56,7 @@ const contactSchema = Joi.object({
 //     }
 // });
 
-app.post("/form" , (req, res) => {
-    const { error, value } = contactSchema.validate(req.body);
-    if (error) {
-        res.send(error);
-    }
-    else {
-        const name = req.body.name;
-        const email = req.body.email;
-        const phone = req.body.phone;
-        const sqlQuery = 'INSERT INTO Persons VALUES (NULL, ?, ?, ?)';
-        sql.query(sqlQuery,[name, email, phone],
-         function (error, results, fields) {
-            if (error) throw error;
-            console.log(results);
-            console.log(fields);
-          });
-        res.redirect(303,"form");
-    }
-});
+
 
 
 
@@ -91,6 +71,11 @@ app.get("/users", (req, res) => {
 // app.get('*', (req, res) => { 
 //     res.redirect(303,"/") })
 
+
+const bookToSave = new Book({title:"HackerU book", pageCount:5});
+
+//Book.find({}).then( books => {books.forEach( book => console.log(book) )}).catch((err) => console.error(err));
+bookToSave.save().then((res)=>{console.log(res)}).catch((err)=>console.error(err));
 
 
 app.listen(PORT, () => {

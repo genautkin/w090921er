@@ -9,7 +9,7 @@ router.post("/create" ,createRequest);
 
 async function createRequest(req, res) {
 
-        const { error, value } = userSchema.validate(req.body);
+        const { error, value } = userSchema.newUser.validate(req.body);
         const user = value;
         if (error) {
             res.status(400).send(error)
@@ -51,5 +51,27 @@ async function createRequest(req, res) {
     })
     }
 
+    router.post("/auth" ,login);
+
+    async function login(req,res){
+        const { error, value } = userSchema.auth.validate(req.body);
+        const user = value;
+        if (error) {
+            res.status(400).send(error)
+        }
+        else{
+            try{
+                const userModel = await UserModel.findOne({email:user.email});
+                if (!userModel) { 
+                    res.status(400).send("Username or password wrong");
+                    return;
+                }
+                const isAuth = await userModel.checkPassword(user.password);
+                res.status(200).send(isAuth);
+            } catch (err) {
+                res.status(400).send(err)
+            }
+        }
+    }
 
 module.exports = router;

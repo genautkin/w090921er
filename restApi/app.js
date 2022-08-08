@@ -12,4 +12,3 @@ app.use('/user',user);
 app.listen(PORT, () => {
 console.log("Server is up on port "+PORT);
     });
-    console("test")

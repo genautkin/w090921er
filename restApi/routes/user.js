@@ -73,5 +73,28 @@ async function createRequest(req, res) {
             }
         }
     }
+    const myPassword = 'aPtdxm7QE5rPLr3^KC!b'
+    var jwt = require('jsonwebtoken');
+    router.post("/checkToken" ,(req,res)=>{
+        const example = { email: "example@example.com", lastLogin: Date.now() };
+        try {
+            var token = jwt.sign(example, myPassword);
+            res.status(200).send(token);
+        }catch  (err) {
+            console.log(err);
+            res.status(400).send(err);
+            return;
+        }
+    });
 
+    router.post("/decryptToken" ,(req,res)=>{
+        try {
+            var decoded = jwt.verify(req.body.token, myPassword);
+            res.status(200).send(decoded);
+        }catch  (err) {
+            console.log(err);
+            res.status(400).send(err);
+            return;
+        }
+    });
 module.exports = router;

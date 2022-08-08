@@ -18,7 +18,7 @@ const contactSchema = Joi.object({
   router.post("/" , (req, res) => {
     const { error, value } = contactSchema.validate(req.body);
     if (error) {
-        res.send(error);
+        res.send(400,error);
     }
     else {
         const name = req.body.name;

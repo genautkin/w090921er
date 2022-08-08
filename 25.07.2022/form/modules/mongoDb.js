@@ -7,7 +7,8 @@ mongoose.connect('mongodb://localhost/books')
 
 const bookSchema = mongoose.Schema({
     title: {type:String, required:true},
-    isbn: String,
+    email: 
+    String,
     pageCount: {
         type: Number,
         required: true,

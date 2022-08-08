@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const _ = require('lodash');
 router.post("/create" ,createRequest);
+const returnUserKeys = ['email','_id','createdAt','name'];
+const checkToken = require('./../middleware/checkToken');
 
 async function createRequest(req, res) {
 
@@ -44,7 +46,7 @@ async function createRequest(req, res) {
         try {
             user.password = await bcrypt.hash(user.password, saltRounds);
             const savedUser = await new UserModel(user).save();
-            resolve(_.pick(savedUser,['email','_id','createdAt','name']));
+            resolve(_.pick(savedUser,returnUserKeys));
        } catch (err) {
            reject (err);
        }
@@ -77,28 +79,43 @@ async function createRequest(req, res) {
             }
         }
     }
-    const myPassword = 'aPtdxm7QE5rPLr3^KC!b'
-    var jwt = require('jsonwebtoken');
-    router.post("/checkToken" ,(req,res)=>{
-        const example = { email: "example@example.com", lastLogin: Date.now() };
-        try {
-            var token = jwt.sign({exp: Math.floor(Date.now() / 1000),data:example}, myPassword);
-            res.status(200).send(token);
-        }catch  (err) {
-            console.log(err);
-            res.status(400).send(err);
-            return;
-        }
-    });
 
-    router.post("/decryptToken" ,(req,res)=>{
-        try {
-            var decoded = jwt.verify(req.body.token, myPassword);
-            res.status(200).send(decoded);
-        }catch  (err) {
-            console.log(err);
-            res.status(400).send(err);
-            return;
+    router.post("/me",checkToken,me);
+
+    async function me(req,res){
+        const userId = req.uid;
+        try{ 
+            const user= await UserModel.findOne({_id:userId});
+            res.status(200).send(_.pick(user,returnUserKeys));
         }
-    });
+        catch (err) {
+            res.status(400).send("User not exists try to login again");
+        }
+    }
+
+
+    // const myPassword = 'aPtdxm7QE5rPLr3^KC!b'
+    // var jwt = require('jsonwebtoken');
+    // router.post("/checkToken" ,(req,res)=>{
+    //     const example = { email: "example@example.com", lastLogin: Date.now() };
+    //     try {
+    //         var token = jwt.sign({exp: Math.floor(Date.now() / 1000),data:example}, myPassword);
+    //         res.status(200).send(token);
+    //     }catch  (err) {
+    //         console.log(err);
+    //         res.status(400).send(err);
+    //         return;
+    //     }
+    // });
+
+    // router.post("/decryptToken" ,(req,res)=>{
+    //     try {
+    //         var decoded = jwt.verify(req.body.token, myPassword);
+    //         res.status(200).send(decoded);
+    //     }catch  (err) {
+    //         console.log(err);
+    //         res.status(400).send(err);
+    //         return;
+    //     }
+    // });
 module.exports = router;

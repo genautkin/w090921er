@@ -67,7 +67,11 @@ async function createRequest(req, res) {
                     return;
                 }
                 const isAuth = await userModel.checkPassword(user.password);
-                res.status(200).send(isAuth);
+                if (!isAuth) {
+                    res.status(400).send("Username or password wrong");
+                    return;
+                }
+                res.status(200).send(userModel.getToken());
             } catch (err) {
                 res.status(400).send(err)
             }
@@ -78,7 +82,7 @@ async function createRequest(req, res) {
     router.post("/checkToken" ,(req,res)=>{
         const example = { email: "example@example.com", lastLogin: Date.now() };
         try {
-            var token = jwt.sign(example, myPassword);
+            var token = jwt.sign({exp: Math.floor(Date.now() / 1000),data:example}, myPassword);
             res.status(200).send(token);
         }catch  (err) {
             console.log(err);

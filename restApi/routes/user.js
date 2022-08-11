@@ -80,6 +80,7 @@ async function createRequest(req, res) {
         }
     }
 
+    router.get("/me",checkToken,me);
     router.post("/me",checkToken,me);
 
     async function me(req,res){

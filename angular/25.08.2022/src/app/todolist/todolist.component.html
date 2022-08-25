@@ -1,0 +1,15 @@
+<h1>Example:{{ title }}</h1>
+<ul>
+    <app-list-item
+     *ngFor="let car of menuItems; let i = index"
+     [item]="car"
+    ></app-list-item>
+    <!-- <li *ngFor="let car of cars; let i = index">{{i+1}} {{car}}</li> -->
+</ul>
+<ul>
+    <app-list-item
+     *ngFor="let car of cars; let i = index"
+     [item]="car"
+    ></app-list-item>
+    <!-- <li *ngFor="let car of cars; let i = index">{{i+1}} {{car}}</li> -->
+</ul>

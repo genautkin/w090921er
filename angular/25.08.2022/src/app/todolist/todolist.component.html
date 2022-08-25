@@ -3,6 +3,7 @@
     <app-list-item
      *ngFor="let car of menuItems; let i = index"
      [item]="car"
+     [index]="''+(i+1)">
     ></app-list-item>
     <!-- <li *ngFor="let car of cars; let i = index">{{i+1}} {{car}}</li> -->
 </ul>
@@ -10,6 +11,7 @@
     <app-list-item
      *ngFor="let car of cars; let i = index"
      [item]="car"
+     [index]="''+(i+1)"
     ></app-list-item>
     <!-- <li *ngFor="let car of cars; let i = index">{{i+1}} {{car}}</li> -->
 </ul>

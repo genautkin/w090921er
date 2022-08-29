@@ -18,6 +18,7 @@ export class MainComponent implements OnInit {
   addImage(name:HTMLInputElement,url:HTMLInputElement) {
     console.log(name.value)
     console.log(url.value)
+    this.imagesArray.push(url.value);
     name.value = ''
     url.value = ''
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Card } from '../models/card.model';
 
 @Component({
   selector: 'app-main',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   constructor() { }
-  imagesArray:any[] =[]
+  imagesArray:Card[] =[]
 
   // :any[] = [];
 
@@ -18,7 +19,7 @@ export class MainComponent implements OnInit {
   addImage(name:HTMLInputElement,url:HTMLInputElement) {
     console.log(name.value)
     console.log(url.value)
-    this.imagesArray.push(url.value);
+    this.imagesArray.push(new Card(name.value,url.value));
     name.value = ''
     url.value = ''
   }

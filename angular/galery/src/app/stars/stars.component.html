@@ -1,0 +1,10 @@
+<span (click)="card.setLikes(1)" class="fa fa-star checked"
+[ngClass]="{'checked' : card.likes>0}"></span>
+<span (click)="card.setLikes(2)" class="fa fa-star checked"
+[ngClass]="{'checked' : card.likes>1}"></span>
+<span (click)="card.setLikes(3)" class="fa fa-star checked"
+[ngClass]="{'checked' : card.likes>2}"></span>
+<span (click)="card.setLikes(4)" class="fa fa-star"
+[ngClass]="{'checked' : card.likes>3}"></span>
+<span (click)="card.setLikes(5)" class="fa fa-star"
+[ngClass]="{'checked' : card.likes>4}"></span>

@@ -6,13 +6,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainComponent } from './main/main.component';
 import { CardComponent } from './card/card.component';
 import { DisplayCardsComponent } from './display-cards/display-cards.component';
+import { StarsComponent } from './stars/stars.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     CardComponent,
-    DisplayCardsComponent
+    DisplayCardsComponent,
+    StarsComponent
   ],
   imports: [
     BrowserModule,

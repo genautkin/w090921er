@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Card } from '../models/card.model';
 
 @Component({
   selector: 'app-display-cards',
@@ -9,7 +10,7 @@ export class DisplayCardsComponent implements OnInit {
 
   constructor() { }
 
-  @Input('images') imagesArray:any[] = [];
+  @Input('images') imagesArray:Card[] = [];
 
   ngOnInit(): void {
   }

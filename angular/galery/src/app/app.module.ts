@@ -7,6 +7,9 @@ import { MainComponent } from './main/main.component';
 import { CardComponent } from './card/card.component';
 import { DisplayCardsComponent } from './display-cards/display-cards.component';
 import { StarsComponent } from './stars/stars.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { SettingsComponent } from './settings/settings.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { StarsComponent } from './stars/stars.component';
     MainComponent,
     CardComponent,
     DisplayCardsComponent,
-    StarsComponent
+    StarsComponent,
+    TabsComponent,
+    SettingsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,9 @@
     <div class="card-footer text-center">
       <small class="text-muted ">{{formatDate(card.date)}}
         <div>
-            <app-stars [card]="card"></app-stars>
+            <app-stars [starsCounter]="5" [volume]="card.likes"
+            (onItemSelected)="card.setLikes($event)"
+            ></app-stars>
         </div>
       </small>
     </div>

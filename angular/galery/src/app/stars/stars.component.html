@@ -1,4 +1,14 @@
-<span (click)="card.setLikes(1)" class="fa fa-star checked"
+<span
+*ngFor="let item of [].constructor(starsCounter); let i = index"
+ (click)="setLikes(i+1)" class="fa fa-star"
+[ngClass]="{'checked' : volume>i || mouseOverItemIndex>i}"
+(mouseenter)="mouseOverItemIndex=i+1"
+(mouseleave)="mouseOverItemIndex=0"></span>
+<i class="fa fa-thumbs-up" (click)="setLikes(volume+1)"></i>
+<!-- <span (click)="setLikes(0)" class="fa fa-trash"></span> -->
+
+
+<!-- <span (click)="card.setLikes(1)" class="fa fa-star checked"
 [ngClass]="{'checked' : card.likes>0}"></span>
 <span (click)="card.setLikes(2)" class="fa fa-star checked"
 [ngClass]="{'checked' : card.likes>1}"></span>
@@ -7,4 +17,4 @@
 <span (click)="card.setLikes(4)" class="fa fa-star"
 [ngClass]="{'checked' : card.likes>3}"></span>
 <span (click)="card.setLikes(5)" class="fa fa-star"
-[ngClass]="{'checked' : card.likes>4}"></span>
+[ngClass]="{'checked' : card.likes>4}"></span> -->

@@ -1,6 +1,30 @@
-<h4 class="text-center mt-3">All images</h4>
+<h4 
+(click)="isBorder = !isBorder"
+[ngStyle]="myStyle"
+[ngClass]="{bordered: isBorder}"
+class="text-center mt-3">All images</h4>
 <div class="row row-cols-1 row-cols-md-3 g-4">
    <app-card *ngFor="let cardElement of imagesArray; let i = index"
    [card]="cardElement"
    ></app-card>
   </div>
+
+  <!-- <div class="ui input">
+
+   <input type="color" name="color" value="{{color}}" #colorinput>
+   
+   </div>
+   <div class="ui input">
+   
+   <input type="text" name="fontSize" value="{{fontSize}}" #fontinput>
+   
+   </div>
+   <button class="ui primary button" (click)="apply(colorinput.value, fontinput.value)">
+   
+   Apply settings
+   </button>
+
+   <span [ngStyle]="{color: color}" [style.font-size.px]="fontSize">
+
+      {{ color }} text
+      </span> -->

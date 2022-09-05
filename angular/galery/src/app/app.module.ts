@@ -10,6 +10,9 @@ import { StarsComponent } from './stars/stars.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AboutComponent } from './about/about.component';
+import { ImagesComponent } from './images/images.component';
+import { FormsModule } from '@angular/forms';
+import { ObservableComponent } from './observable/observable.component';
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import { AboutComponent } from './about/about.component';
     StarsComponent,
     TabsComponent,
     SettingsComponent,
-    AboutComponent
+    AboutComponent,
+    ImagesComponent,
+    ObservableComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     NgbModule
   ],
   providers: [],

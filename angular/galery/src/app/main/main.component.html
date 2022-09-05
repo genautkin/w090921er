@@ -1,29 +1,11 @@
-<app-tabs (onTabClick)="selectTab($event)"></app-tabs>
-<div *ngIf="selectedTab==='images'" class="container mt-5">
-    <div class="mb-3">
-      <label for="name" class="form-label">Image name</label>
-      <input 
-      (input)="onInput()" type="text" class="form-control" class="form-control" id="name"
-       placeholder="Enter img name" #name
-       >
-    </div>
-    <div class="mb-3">
-      <label for="url" class="form-label">Image url</label>
-      <input
-      (input)="onInput()"
-       type="url" class="form-control" id="url" 
-      placeholder="Enter img url"
-      #url>
-    </div>
-    <div class="d-grid gap-2">
-      <button
-       [disabled]="isButtonDisabled" (click)="addImage(name, url)" class="btn btn-primary" type="button">Add</button>
-    </div>
-    <app-display-cards [images]="imagesArray" ></app-display-cards>
-  </div>
+<div class="container mt-1">
+
+  <app-tabs (onTabClick)="selectTab($event)"></app-tabs>
+  <app-images *ngIf="selectedTab==='images'"></app-images>
   <app-settings *ngIf="selectedTab==='settings'"></app-settings>
   <app-about *ngIf="selectedTab==='about'"></app-about>
-
+  <app-observable></app-observable>
+</div>
   <!-- <div class="container" [ngSwitch]="myVar">
     <div *ngSwitchCase="'A'">Var is A</div>
     <div *ngSwitchCase="'B'">Var is B</div>

@@ -13,6 +13,7 @@ import { AboutComponent } from './about/about.component';
 import { ImagesComponent } from './images/images.component';
 import { FormsModule } from '@angular/forms';
 import { ObservableComponent } from './observable/observable.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ObservableComponent } from './observable/observable.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     NgbModule
   ],

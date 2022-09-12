@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Card } from '../models/card.model';
 
@@ -8,7 +9,8 @@ import { Card } from '../models/card.model';
 })
 export class ImagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+  API_URL = 'https://picsum.photos/v2/list'
   imagesArray:Card[] =[]
   @ViewChild('url') url!:ElementRef;
   @ViewChild('name') name!:ElementRef;
@@ -48,6 +50,17 @@ export class ImagesComponent implements OnInit {
     else{
       this.isButtonDisabled=true;
     }
+  }
+
+  addRandomImages() {
+   this.http.get(this.API_URL).subscribe({
+    next: (imagesArray:any) => {
+      imagesArray.forEach((image:any) => 
+      this.imagesArray.push(new Card(image.author,image.download_url)))
+    },
+    error: (e) => console.error(e),
+    complete: () => console.info('complete') 
+})
   }
 
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from '../models/card.model';
+import { ImagesService } from '../services/images.service';
 
 @Component({
   selector: 'app-card',
@@ -8,7 +9,7 @@ import { Card } from '../models/card.model';
 })
 export class CardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private imgSer: ImagesService) { }
 
   @Input() card!: Card;
   ngOnInit(): void {
@@ -17,6 +18,10 @@ export class CardComponent implements OnInit {
   formatDate(d:Date): string {
     return ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+  }
+
+  removeCard() {
+    this.imgSer.removeImageById(this.card.id);
   }
 
 }

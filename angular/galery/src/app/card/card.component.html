@@ -1,7 +1,9 @@
 <div class="card">
     <img [src]="card.url" class="card-img-top" [alt]="card.name">
     <div class="card-body">
-      <h5 class="card-title">{{card.name}}</h5>
+      <h5 class="card-title">{{card.name}}
+        <i (click)="removeCard()" class="fa fa-trash ml-5 pointer" aria-hidden="true"></i>
+      </h5>
     </div>
     <div class="card-footer text-center">
       <small class="text-muted ">{{formatDate(card.date)}}

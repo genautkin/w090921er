@@ -6,6 +6,14 @@ import { Card } from '../models/card.model';
 })
 export class ImagesService {
 
-  constructor() { }
-  imagesArray:Card[] =[]
+  constructor() { 
+    console.log('ImagesService')
+  }
+  imagesArray:Card[] = [];
+
+  removeImageById(id:string){
+    console.log(this.imagesArray)
+    this.imagesArray = this.imagesArray.filter(image => image.id!== id);
+    console.log(this.imagesArray)
+  }
 }

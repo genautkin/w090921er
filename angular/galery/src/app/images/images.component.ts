@@ -1,17 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Card } from '../models/card.model';
+import { ImagesService } from '../services/images.service';
 
 @Component({
   selector: 'app-images',
   templateUrl: './images.component.html',
   styleUrls: ['./images.component.css']
 })
-export class ImagesComponent implements OnInit {
+export class ImagesComponent implements OnInit,AfterViewInit,OnDestroy {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private imgService:ImagesService) { }
   API_URL = 'https://picsum.photos/v2/list'
-  imagesArray:Card[] =[]
+  imagesArray:Card[] = this.imgService.imagesArray;
   @ViewChild('url') url!:ElementRef;
   @ViewChild('name') name!:ElementRef;
   myVar = 'dasd'
@@ -19,6 +20,13 @@ export class ImagesComponent implements OnInit {
   isButtonDisabled=true;
   formData = {url:'example.com', name:'example2'}
   ngOnInit(): void { 
+    console.log("ngOnInit")
+    console.log(this.url)
+   }
+
+   ngAfterViewInit(): void {
+    console.log("ngAfterViewInit")
+    console.log(this.url)
    }
 
   // addImage(name:HTMLInputElement,url:HTMLInputElement) {
@@ -31,7 +39,7 @@ export class ImagesComponent implements OnInit {
   // }
 
   addImage() {
-    this.imagesArray.push(new Card(this.formData.name,this.formData.url));
+    this.imgService.imagesArray.push(new Card(this.formData.name,this.formData.url));
     this.formData.name = ''
     this.formData.url = ''
   }
@@ -56,7 +64,7 @@ export class ImagesComponent implements OnInit {
    this.http.get(this.API_URL).subscribe({
     next: (imagesArray:any) => {
       imagesArray.forEach((image:any) => 
-      this.imagesArray.push(new Card(image.author,image.download_url)))
+      this.imgService.imagesArray.push(new Card(image.author,image.download_url)))
     },
     error: (e) => console.error(e),
     complete: () => console.info('complete') 
@@ -70,6 +78,10 @@ export class ImagesComponent implements OnInit {
       url: "this.formData.url",
       description: "Test"
     }),{headers: myHeaders}).subscribe(data => console.log(data));
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy');
   }
 
 }

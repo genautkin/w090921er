@@ -20,6 +20,6 @@
       <button
        [disabled]="formData.name.length === 0 || formData.url.length === 0" (click)="addImage()" class="btn btn-primary" type="button">Add</button>
        <button (click)="addRandomImages()" class="btn btn-secondary" type="button">Add random images</button>
-       <button (click)="post()" class="btn btn-secondary" type="button">Post</button>
+       <!-- <button (click)="post()" class="btn btn-secondary" type="button">Post</button> -->
     </div>
     <app-display-cards [images]="imagesArray" ></app-display-cards>

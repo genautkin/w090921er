@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Card } from '../models/card.model';
 
@@ -63,5 +63,13 @@ export class ImagesComponent implements OnInit {
 })
   }
 
+  post() {
+    const myHeaders = new HttpHeaders({'Content-Type': 'application/json' });
+    this.http.post('https://dummyjson.com/products/add',JSON.stringify({
+      name: "this.formData.name",
+      url: "this.formData.url",
+      description: "Test"
+    }),{headers: myHeaders}).subscribe(data => console.log(data));
+  }
 
 }

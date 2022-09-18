@@ -1,15 +1,20 @@
 export class Card {
     name:string;
     url:string;
-    date:Date;
+    date:number;
     likes:number;
     id:string;
-    constructor(name:string,url:string) {
-        this.id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+    constructor(name:string,
+        url:string,
+        id:string = Date.now().toString(36) + Math.random().toString(36).substr(2),
+        date:number = new Date().getTime(),
+        likes:number = 0) {
+
+        this.id = id
         this.name = name;
         this.url = url;
-        this.date = new Date();
-        this.likes = 0;
+        this.date = date ;
+        this.likes = likes;
     }
 
     setLikes(likes:number) {

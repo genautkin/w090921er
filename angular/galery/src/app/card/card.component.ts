@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Card } from '../models/card.model';
 import { ImagesService } from '../services/images.service';
 
@@ -15,7 +15,9 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  formatDate(d:Date): string {
+
+  formatDate(timeStamp:number): string {
+    const d = new Date(timeStamp);
     return ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
   }

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Card } from '../models/card.model';
 import { ImagesService } from '../services/images.service';
 
@@ -12,16 +13,18 @@ export class ImagesComponent implements OnInit,AfterViewInit,OnDestroy {
 
   constructor(private http: HttpClient,private imgService:ImagesService) { }
   API_URL = 'https://picsum.photos/v2/list'
-  imagesArray:Card[] = this.imgService.imagesArray;
+  imagesArray:Card[] = [];
   @ViewChild('url') url!:ElementRef;
   @ViewChild('name') name!:ElementRef;
   myVar = 'dasd'
   // :any[] = [];
   isButtonDisabled=true;
   formData = {url:'example.com', name:'example2'}
+  subscribeImages:Subscription | undefined;
   ngOnInit(): void { 
-    console.log("ngOnInit")
-    console.log(this.url)
+   this.subscribeImages = this.imgService.imagesObservable.subscribe(data => {
+      console.log("Got new images");
+      this.imagesArray=data}); 
    }
 
    ngAfterViewInit(): void {
@@ -29,14 +32,6 @@ export class ImagesComponent implements OnInit,AfterViewInit,OnDestroy {
     console.log(this.url)
    }
 
-  // addImage(name:HTMLInputElement,url:HTMLInputElement) {
-  //   console.log(this.url.nativeElement.value);
-  //   console.log(this.name.nativeElement.value)
-  //   this.imagesArray.push(new Card(this.formData.value,url.value));
-  //   name.value = ''
-  //   url.value = ''
-  //   console.log(this.formData)
-  // }
 
   addImage() {
     this.imgService.imagesArray.push(new Card(this.formData.name,this.formData.url));
@@ -61,10 +56,13 @@ export class ImagesComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   addRandomImages() {
+    var tempImagesArray:Card[] =[]
    this.http.get(this.API_URL).subscribe({
     next: (imagesArray:any) => {
-      imagesArray.forEach((image:any) => 
-      this.imgService.imagesArray.push(new Card(image.author,image.download_url)))
+      imagesArray.forEach((image:any) => {
+        tempImagesArray.push(new Card(image.author,image.download_url))
+      })
+      this.imgService.addImages(tempImagesArray);
     },
     error: (e) => console.error(e),
     complete: () => console.info('complete') 
@@ -81,6 +79,7 @@ export class ImagesComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   ngOnDestroy() {
+    this.subscribeImages?.unsubscribe();
     console.log('ngOnDestroy');
   }
 

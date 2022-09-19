@@ -1,0 +1,13 @@
+<div class="container mt-1">
+
+  <app-tabs (onTabClick)="selectTab($event)"></app-tabs>
+  <app-images *ngIf="selectedTab==='images'"></app-images>
+  <app-settings *ngIf="selectedTab==='settings'"></app-settings>
+  <app-about *ngIf="selectedTab==='about'"></app-about>
+  <!-- <app-observable></app-observable> -->
+</div>
+  <!-- <div class="container" [ngSwitch]="myVar">
+    <div *ngSwitchCase="'A'">Var is A</div>
+    <div *ngSwitchCase="'B'">Var is B</div>
+    <div *ngSwitchDefault>Var is something else</div>
+    </div> -->

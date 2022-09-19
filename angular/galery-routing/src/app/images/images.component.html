@@ -1,0 +1,25 @@
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Image name</label>
+      <input 
+      (input)="onInput(name)" type="text" class="form-control" class="form-control" id="name"
+      [(ngModel)]="formData.name"
+       placeholder="Enter img name" #name
+       >
+    </div>
+    <div class="mb-3">
+      <label for="url" class="form-label">Image url</label>
+      <input
+      (input)="onInput(url)"
+      [(ngModel)]="formData.url"
+       type="url" class="form-control" id="url" 
+      placeholder="Enter img url"
+      #url>
+    </div>
+    <div class="d-grid gap-2">
+      <button
+       [disabled]="formData.name.length === 0 || formData.url.length === 0" (click)="addImage()" class="btn btn-primary" type="button">Add</button>
+       <button (click)="addRandomImages()" class="btn btn-secondary" type="button">Add random images</button>
+       <!-- <button (click)="post()" class="btn btn-secondary" type="button">Post</button> -->
+    </div>
+    <app-display-cards [images]="imagesArray" ></app-display-cards>

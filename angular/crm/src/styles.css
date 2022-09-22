@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/css/fontawesome-free/css/all.min.css";
+@import "./assets/css/sb-admin-2.css";
+html {
+    height: 100%;
+}

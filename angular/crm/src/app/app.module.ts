@@ -6,19 +6,26 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { IfUserLogin } from './services/authGate.service';
-import { IfCanOpenLogin } from './services/loginGate.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { AccordionSidebarComponent } from './components/accordion-sidebar/accordion-sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    AccordionSidebarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    NgbModule
   ],
-  providers: [IfUserLogin,IfCanOpenLogin],
+  providers: [IfUserLogin],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

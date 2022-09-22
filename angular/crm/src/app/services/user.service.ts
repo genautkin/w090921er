@@ -19,4 +19,10 @@ export class UserService {
 
 
   }
+
+  login(email: string, password: string) {
+    console.log(email, password);
+    this._isLoggedIn = true;
+    this.route.navigate(['/dashboard']);
+  }
 }

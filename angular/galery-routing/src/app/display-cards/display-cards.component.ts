@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from '../models/card.model';
 
 @Component({
@@ -8,7 +9,7 @@ import { Card } from '../models/card.model';
 })
 export class DisplayCardsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   @Input('images') imagesArray:Card[] = [];
   color = 'yellow';
@@ -23,5 +24,7 @@ export class DisplayCardsComponent implements OnInit {
     this.color = color;
     this.fontSize = size;
   }
-
+  imageClick(index: number){
+    this.route.navigate(['/images',index]);
+  }
 }

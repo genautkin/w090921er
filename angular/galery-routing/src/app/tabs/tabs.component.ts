@@ -8,14 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class TabsComponent implements OnInit {
 
   constructor() { }
-  selectedTab: string = 'images'
-  @Output() onTabClick = new EventEmitter<string>();
   ngOnInit(): void {
-  }
-
-  selectTab(tab:string) {
-    this.selectedTab = tab;
-    this.onTabClick.emit(tab);
   }
 
 }

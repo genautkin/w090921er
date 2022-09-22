@@ -8,15 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   constructor() { }
-  selectedTab:string = 'images';
   ngOnInit(): void {
   }
 
 
 
-
-  selectTab(tab: string) {
-    this.selectedTab = tab;
-  }
 
 }

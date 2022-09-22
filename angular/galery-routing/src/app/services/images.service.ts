@@ -33,4 +33,11 @@ export class ImagesService {
     this.imagesObservable.next(this.imagesArray);
     localStorage.setItem('imagesArray', JSON.stringify(this.imagesArray));
   }
+
+  getImgById(index:string):string | undefined   {
+    if (this.imagesArray[Number(index)]) {
+      return this.imagesArray[Number(index)].url;
+    }
+    return undefined;
+  }
 }

@@ -36,7 +36,10 @@
                                             </div>
                                         </div> -->
                                         <a (click)="login()" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Login 
+                                            <div *ngIf="tryToLogin" class="spinner-border text-light" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                              </div>
                                         </a>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">

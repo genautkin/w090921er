@@ -7,7 +7,7 @@ export class IfUserLogin implements CanActivate {
   constructor(private userService:UserService) {}
 
 
-  canActivate(): boolean{
+  canActivate(): Promise<boolean>{
     return this.userService.isLoggedIn();
   }
 }

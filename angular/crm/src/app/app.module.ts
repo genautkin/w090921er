@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { AccordionSidebarComponent } from './components/accordion-sidebar/accordion-sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
+    //add it to make the firebase to work
+    AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+   
   ],
   providers: [IfUserLogin],
   bootstrap: [AppComponent]

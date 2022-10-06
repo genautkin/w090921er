@@ -14,6 +14,8 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { TestFirebaseComponent } from './components/test-firebase/test-firebase.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { CustomersComponent } from './components/customers/customers.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { TestFirebaseComponent } from './components/test-firebase/test-firebase.
     DashboardComponent,
     AccordionSidebarComponent,
     NavbarComponent,
-    TestFirebaseComponent
+    TestFirebaseComponent,
+    EditUserComponent,
+    CustomersComponent
   ],
   imports: [
     BrowserModule,

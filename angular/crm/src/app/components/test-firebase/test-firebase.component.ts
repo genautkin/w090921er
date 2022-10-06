@@ -9,6 +9,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class TestFirebaseComponent implements OnInit,OnDestroy {
   unsubscribeToCollection:any;
 
+
   constructor(private afs: AngularFirestore) { }
   ngOnDestroy(): void {
     this.unsubscribeToCollection()
@@ -64,8 +65,6 @@ export class TestFirebaseComponent implements OnInit,OnDestroy {
         console.log(doc.data());
       })
      },error => console.error(error))
-
-    
   }
 
 

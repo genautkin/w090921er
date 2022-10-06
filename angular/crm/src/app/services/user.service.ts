@@ -35,8 +35,6 @@ export class UserService {
   userStateChanged(user: firebase.User | null){
     if (user) {
       this._isLoggedIn = true;
-      this.route.navigate(['/dashboard']);
-      console.log(user);
     }
     else {
       this._isLoggedIn = false;
@@ -48,7 +46,7 @@ export class UserService {
     return this.auth.
     signInWithEmailAndPassword(email, password).then((user:firebase.auth.UserCredential) => {
       this.user = user;
-      console.log(user);
+      this.route.navigate(['/dashboard']);
       this._isLoggedIn = true;
     })
   }

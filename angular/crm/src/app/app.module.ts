@@ -12,6 +12,8 @@ import { AccordionSidebarComponent } from './components/accordion-sidebar/accord
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { TestFirebaseComponent } from './components/test-firebase/test-firebase.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { AngularFireModule } from '@angular/fire/compat';
     LoginComponent,
     DashboardComponent,
     AccordionSidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    TestFirebaseComponent
   ],
   imports: [
     BrowserModule,
     //add it to make the firebase to work
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     FormsModule,
     AppRoutingModule,
     NgbModule,

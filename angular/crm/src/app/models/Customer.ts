@@ -46,7 +46,22 @@ export class Customer {
             createdDate: this.createdDate,
             status: this.status
     }
+
+
 }
+
+static fromFirebaseToClass(data:any) {
+    return new Customer(
+        data.id,
+        data.firstName || '',
+        data.lastName || '',
+        data.email || '',
+        data.phoneNumber || '',
+        data.address || '',
+        data.notes || '',
+        data.createdDate || '',
+        data.status || 0
+        )}
 }
 
 

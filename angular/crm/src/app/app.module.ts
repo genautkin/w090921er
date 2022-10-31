@@ -16,6 +16,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { TestFirebaseComponent } from './components/test-firebase/test-firebase.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { CustomersComponent } from './components/customers/customers.component';
+import { TimeStampToDate } from './pipes/timeStampToDate';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CustomersComponent } from './components/customers/customers.component';
     NavbarComponent,
     TestFirebaseComponent,
     EditUserComponent,
-    CustomersComponent
+    CustomersComponent,
+    TimeStampToDate
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 
         <th scope="col">Phone Number</th>
         <th scope="col">Address</th>
         <th scope="col">Created Date</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -32,5 +33,9 @@ class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 
         <td>{{customer.phoneNumber}}</td>
         <td>{{customer.address}}</td>
         <td>{{customer.createdDate | timeStampToDate}}</td>
+        <td><div class="input-group-append">
+          <span (click)="remove(customer)" class="input-group-text pointer fas fa-trash-alt mr-2"></span>
+          <span (click)="goCustomer(customer.id)" class="input-group-text pointer">Edit</span>
+        </div></td>
       </tr>
   </table>

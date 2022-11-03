@@ -47,7 +47,6 @@ export class Customer {
             status: this.status
     }
 
-
 }
 
 static fromFirebaseToClass(data:any) {

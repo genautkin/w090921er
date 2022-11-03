@@ -7,6 +7,8 @@ import { Customer, UserStatus } from '../models/Customer';
   providedIn: 'root'
 })
 export class CustomerService {
+ 
+
   unsubscribe:any = null;
 
   constructor(private afs:AngularFirestore) {
@@ -36,6 +38,11 @@ export class CustomerService {
       this.customerSubject.next(this.customers);
      },error => console.error(error))
   }
+  removeCustomerById(id: number) {
+    return this.afs.doc(this.customerCollection+"/"+id).set({status:0},{merge:true})
+  }
+
+  
 
 
   
